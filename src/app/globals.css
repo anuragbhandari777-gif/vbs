@@ -1,0 +1,302 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-glow: var(--primary-glow);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 1rem;
+  --background: oklch(0.16 0.012 160);
+  --foreground: oklch(0.97 0.008 150);
+  --card: oklch(0.2 0.016 160);
+  --card-foreground: oklch(0.97 0.008 150);
+  --popover: oklch(0.2 0.016 160);
+  --popover-foreground: oklch(0.97 0.008 150);
+  --primary: oklch(0.78 0.19 150);
+  --primary-foreground: oklch(0.16 0.02 160);
+  --primary-glow: oklch(0.88 0.16 148);
+  --secondary: oklch(0.26 0.022 160);
+  --secondary-foreground: oklch(0.97 0.008 150);
+  --muted: oklch(0.24 0.018 160);
+  --muted-foreground: oklch(0.72 0.02 155);
+  --accent: oklch(0.3 0.045 158);
+  --accent-foreground: oklch(0.97 0.008 150);
+  --destructive: oklch(0.62 0.21 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.32 0.03 158 / 55%);
+  --input: oklch(0.32 0.03 158 / 55%);
+  --ring: oklch(0.78 0.19 150);
+  --surface: oklch(0.19 0.014 160);
+  --surface-2: oklch(0.23 0.02 160);
+
+  --gradient-primary: linear-gradient(
+    120deg,
+    var(--primary) 0%,
+    var(--primary-glow) 100%
+  );
+  --gradient-surface: linear-gradient(
+    150deg,
+    oklch(0.24 0.03 158) 0%,
+    oklch(0.17 0.012 160) 65%
+  );
+  --gradient-halo: radial-gradient(
+    ellipse 60% 55% at 50% 40%,
+    oklch(0.5 0.14 152 / 30%) 0%,
+    transparent 70%
+  );
+  --shadow-glow: 0 0 60px -12px oklch(0.78 0.19 150 / 45%);
+  --shadow-card: 0 24px 60px -30px oklch(0 0 0 / 90%);
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+  }
+}
+
+@utility halo {
+  background-image: var(--gradient-halo);
+}
+
+@utility surface-card {
+  background-image: var(--gradient-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+@utility text-gradient {
+  background-image: var(--gradient-primary);
+  background-clip: text;
+  color: transparent;
+}
+
+@utility btn-primary {
+  background-image: var(--gradient-primary);
+  color: var(--primary-foreground);
+  box-shadow: var(--shadow-glow);
+  transition: transform 0.25s ease, filter 0.25s ease;
+  &:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+  }
+}
+
+@utility btn-ghost {
+  border: 1px solid var(--color-border);
+  background-color: oklch(1 0 0 / 4%);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+  &:hover {
+    background-color: oklch(1 0 0 / 8%);
+    border-color: var(--color-primary);
+  }
+}
+
+@utility marquee-track {
+  animation: vb-marquee 32s linear infinite;
+}
+
+@keyframes vb-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* --- ripple + reveal motion --- */
+@utility ripple-ring {
+  animation: vb-ripple 8s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  opacity: 0;
+}
+
+@keyframes vb-ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0.25);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.4);
+    opacity: 0;
+  }
+}
+
+@utility ripple-drop {
+  animation: vb-drop 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+@keyframes vb-drop {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0.9;
+    box-shadow: 0 0 30px -4px var(--primary);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(24);
+    opacity: 0;
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@utility rise-in {
+  animation: vb-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes vb-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility float-slow {
+  animation: vb-float 7s ease-in-out infinite;
+}
+
+@keyframes vb-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@utility tilt-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease, border-color 0.4s ease;
+  &:hover {
+    transform: translateY(-8px) scale(1.015);
+    border-color: oklch(0.78 0.19 150 / 45%);
+    box-shadow: var(--shadow-card), var(--shadow-glow);
+  }
+}
+
+/* --- nav shimmer border --- */
+@utility nav-shimmer {
+  position: relative;
+  border-radius: 9999px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1.5px;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(
+      from var(--nav-shimmer-angle, 0deg),
+      transparent 0deg,
+      transparent 60deg,
+      var(--primary-glow) 120deg,
+      var(--primary) 150deg,
+      var(--primary-glow) 180deg,
+      transparent 240deg,
+      transparent 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: vb-nav-shimmer 2s ease-out 0.3s 1 forwards;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@property --nav-shimmer-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes vb-nav-shimmer {
+  0% {
+    --nav-shimmer-angle: 0deg;
+    opacity: 1;
+  }
+  70% {
+    --nav-shimmer-angle: 360deg;
+    opacity: 1;
+  }
+  100% {
+    --nav-shimmer-angle: 360deg;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ripple-ring,
+  .ripple-drop,
+  .marquee-track,
+  .float-slow,
+  .rise-in {
+    animation: none !important;
+  }
+
+  .nav-shimmer::before {
+    animation: none !important;
+  }
+}
+
