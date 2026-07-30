@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { Typewriter } from "@/components/typewriter";
 
 export const metadata: Metadata = {
   title: "About — Veda Byte Solutions",
@@ -26,7 +27,7 @@ export default function About() {
           <div className="halo pointer-events-none absolute inset-0" />
           <div className="relative mx-auto max-w-4xl px-6 pb-16 pt-44 text-center">
             <h1 className="text-4xl font-bold leading-tight sm:text-6xl">
-              More than a template website
+              <Typewriter text="More than a template website" speed={55} delay={300} />
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground">
               Veda Byte Solutions was founded in 2025 on a simple idea: most
