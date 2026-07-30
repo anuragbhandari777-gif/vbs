@@ -34,6 +34,8 @@ const services = [
       "API-first architecture so your platform can grow and integrate without rewrites",
     ],
     detail: "Typical engagements: web applications, internal tools, API development, system integrations.",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=640&q=80&fit=crop",
+    imageAlt: "Lines of code on a dark monitor",
   },
   {
     icon: Smartphone,
@@ -49,6 +51,8 @@ const services = [
       "Push notification pipelines, deep linking, and background sync that actually work",
     ],
     detail: "Typical engagements: iOS and Android apps, React Native, cross-platform product builds.",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=640&q=80&fit=crop",
+    imageAlt: "Person holding a smartphone with app interface",
   },
   {
     icon: Cloud,
@@ -64,6 +68,8 @@ const services = [
       "Database management, backup strategies, and disaster recovery that have actually been tested",
     ],
     detail: "Typical engagements: AWS/GCP/Azure setup, CI/CD pipelines, containerisation, monitoring.",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=640&q=80&fit=crop",
+    imageAlt: "Data center server racks with blue lighting",
   },
   {
     icon: Palette,
@@ -79,6 +85,8 @@ const services = [
       "Usability testing with real users at key milestones, not just internal sign-off",
     ],
     detail: "Typical engagements: product design, wireframing, user testing, design systems.",
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=640&q=80&fit=crop",
+    imageAlt: "Designer working on UI wireframes and colour palettes",
   },
   {
     icon: Users,
@@ -94,6 +102,8 @@ const services = [
       "Hiring support: defining roles, reviewing candidates, structuring technical interviews",
     ],
     detail: "Typical engagements: team augmentation, technical advisory, architecture review, hiring support.",
+    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=640&q=80&fit=crop",
+    imageAlt: "Team collaborating around a table in a modern office",
   },
 ];
 
@@ -117,17 +127,19 @@ export default function Services() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-4xl px-6 pb-16">
+        <section className="mx-auto max-w-5xl px-6 pb-16">
           <div className="space-y-5">
             {services.map((s, i) => (
               <ServiceCard
                 key={s.title}
-                iconNode={<s.icon className="size-6 text-primary" />}
+                iconNode={<s.icon className="size-5 text-primary" />}
                 title={s.title}
                 summary={s.summary}
                 body={s.body}
                 detail={s.detail}
                 bullets={s.bullets}
+                image={s.image}
+                imageAlt={s.imageAlt}
                 direction={i % 2 === 0 ? "left" : "right"}
                 index={i}
               />
@@ -135,7 +147,7 @@ export default function Services() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-4xl px-6 pb-24">
+        <section className="mx-auto max-w-5xl px-6 pb-24">
           <div className="surface-card rounded-[2rem] p-10 text-center">
             <h2 className="text-2xl font-bold sm:text-3xl">
               Not sure where to start?

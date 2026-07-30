@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import Image from "next/image";
 
 interface ServiceCardProps {
   iconNode: ReactNode;
@@ -9,6 +10,8 @@ interface ServiceCardProps {
   body: string;
   detail: string;
   bullets: string[];
+  image: string;
+  imageAlt: string;
   direction: "left" | "right";
   index: number;
 }
@@ -20,11 +23,12 @@ export function ServiceCard({
   body,
   detail,
   bullets,
+  image,
+  imageAlt,
   direction,
   index,
 }: ServiceCardProps) {
   const ref = useRef<HTMLElement>(null);
-
   const [visible, setVisible] = useState(false);
   const [hovered, setHovered] = useState(false);
 
@@ -38,13 +42,14 @@ export function ServiceCard({
           observer.disconnect();
         }
       },
-      { threshold: 0.15 },
+      { threshold: 0.12 },
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
   const slideClass = direction === "left" ? "slide-from-left" : "slide-from-right";
+  const imageFirst = direction === "left";
 
   return (
     <article
@@ -53,32 +58,41 @@ export function ServiceCard({
       onMouseLeave={() => setHovered(false)}
       style={{ animationDelay: `${index * 0.1}s` }}
       className={[
-        "surface-card rounded-3xl p-8 md:p-10 transition-all duration-500 ease-out cursor-default",
-        "opacity-0",
+        "surface-card rounded-3xl overflow-hidden transition-all duration-500 ease-out cursor-default opacity-0",
         visible ? slideClass : "",
       ]
         .filter(Boolean)
         .join(" ")}
     >
-      <div className="grid gap-6 md:grid-cols-[auto_1fr]">
-        <div className="flex md:flex-col items-start gap-4 md:gap-6">
-          <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10">
-            {iconNode}
-          </div>
-          {/* direction indicator bar */}
-          <div
+      <div className={`flex flex-col ${imageFirst ? "md:flex-row" : "md:flex-row-reverse"}`}>
+
+        {/* Image panel */}
+        <div className="relative h-52 w-full shrink-0 md:h-auto md:w-72 lg:w-80 overflow-hidden">
+          <Image
+            src={image}
+            alt={imageAlt}
+            fill
+            sizes="(max-width: 768px) 100vw, 320px"
             className={[
-              "hidden md:block h-px w-10 bg-primary/30 mt-6 transition-all duration-500",
-              hovered ? "w-16 bg-primary/60" : "",
+              "object-cover transition-transform duration-700 ease-out",
+              hovered ? "scale-105" : "scale-100",
             ].join(" ")}
           />
+          {/* dark overlay so text-on-image never needed */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-black/20" />
         </div>
 
-        <div>
-          <h2 className="text-xl font-semibold">{title}</h2>
+        {/* Text panel */}
+        <div className="flex flex-1 flex-col justify-center gap-0 p-8 md:p-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+              {iconNode}
+            </div>
+            <h2 className="text-xl font-semibold">{title}</h2>
+          </div>
 
           {/* summary — always visible */}
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          <p className="text-sm leading-relaxed text-muted-foreground">
             {summary}
           </p>
 
@@ -86,7 +100,7 @@ export function ServiceCard({
           <div
             className={[
               "overflow-hidden transition-all duration-500 ease-out",
-              hovered ? "max-h-[600px] opacity-100 mt-4" : "max-h-0 opacity-0",
+              hovered ? "max-h-[600px] opacity-100 mt-5" : "max-h-0 opacity-0",
             ].join(" ")}
           >
             <p className="text-sm leading-relaxed text-muted-foreground">
@@ -113,7 +127,7 @@ export function ServiceCard({
           <p
             className={[
               "mt-3 text-xs text-primary/50 transition-opacity duration-300",
-              hovered ? "opacity-0" : "opacity-100",
+              hovered ? "opacity-0 pointer-events-none" : "opacity-100",
             ].join(" ")}
           >
             Hover to learn more →
