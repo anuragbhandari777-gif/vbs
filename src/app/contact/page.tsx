@@ -50,7 +50,7 @@ export default function Contact() {
                   <li className="flex items-start gap-3">
                     <Phone className="mt-0.5 size-4 shrink-0 text-primary" />
                     <div className="text-muted-foreground">
-                      <p>+977 9811933213</p>
+                      <p>+977 98119332556813</p>
                       <p>+977 9849916191</p>
                     </div>
                   </li>
