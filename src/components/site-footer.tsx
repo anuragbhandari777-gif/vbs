@@ -70,7 +70,7 @@ export function SiteFooter() {
             <p className="mt-1 text-sm text-muted-foreground">44600</p>
           </div>
           <div>
-            <p className="text-sm text-primary">+977 9811933213456456</p>
+            <p className="text-sm text-primary">+977 9811933213</p>
             <p className="text-sm text-primary">+977 9849916191</p>
             <p className="mt-1 text-sm text-muted-foreground">
               vedabytesolutions1@gmail.com
