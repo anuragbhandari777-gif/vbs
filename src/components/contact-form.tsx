@@ -5,15 +5,46 @@ import { toast } from "sonner";
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const payload = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to send");
+      }
+
+      setSent(true);
+      toast.success("Thanks — we'll be in touch shortly.");
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Please try again or email us directly.");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <form
       className="surface-card rounded-[2rem] p-8"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSent(true);
-        toast.success("Thanks — we'll be in touch shortly.");
-      }}
+      onSubmit={handleSubmit}
     >
       <div className="grid gap-5">
         <label className="grid gap-2 text-sm">
@@ -47,9 +78,10 @@ export function ContactForm() {
         </label>
         <button
           type="submit"
-          className="btn-primary rounded-full px-6 py-3 text-sm font-semibold"
+          disabled={loading}
+          className="btn-primary rounded-full px-6 py-3 text-sm font-semibold disabled:opacity-60"
         >
-          {sent ? "Message sent" : "Send message"}
+          {loading ? "Sending..." : sent ? "Message sent" : "Send message"}
         </button>
       </div>
     </form>
