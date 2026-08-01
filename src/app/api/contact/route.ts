@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Email to you (the business)
     const { error } = await resend.emails.send({
       from: "Veda Byte Website <onboarding@resend.dev>",
       to: process.env.CONTACT_TO_EMAIL as string,
@@ -28,6 +29,20 @@ export async function POST(req: NextRequest) {
         { error: "Failed to send email." },
         { status: 500 }
       );
+    }
+
+    // Confirmation email back to the person who submitted
+    const { error: confirmError } = await resend.emails.send({
+      from: "Veda Byte Solutions <onboarding@resend.dev>",
+      to: email,
+      subject: "We received your message — Veda Byte Solutions",
+      text: `Hi ${name},\n\nThanks for reaching out to Veda Byte Solutions. We've received your message and a senior engineer will get back to you shortly.\n\nFor reference, here's what you sent us:\n"${message}"\n\n— Veda Byte Solutions`,
+    });
+
+    if (confirmError) {
+      // Don't fail the whole request if just the confirmation email fails —
+      // the business already received the inquiry either way.
+      console.error("Confirmation email error:", confirmError);
     }
 
     return NextResponse.json({ success: true });
