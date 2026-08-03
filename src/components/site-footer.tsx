@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LinkedInIcon from "./linkedin-icon";
 
 const columns = [
   {
@@ -70,11 +71,20 @@ export function SiteFooter() {
             <p className="mt-1 text-sm text-muted-foreground">44600</p>
           </div>
           <div>
-            <p className="text-sm text-primary">+977 9811933213</p>
+            <p className="text-sm text-primary">+977 981193321</p>
             <p className="text-sm text-primary">+977 9849916191</p>
             <p className="mt-1 text-sm text-muted-foreground">
               vedabytesolutions1@gmail.com
             </p>
+            
+              <a href="https://www.linkedin.com/in/vedabyte-solutions-359161425/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="mt-3 inline-flex text-muted-foreground transition-colors hover:text-primary"
+            >
+              <LinkedInIcon size={20} />
+            </a>
           </div>
         </div>
 

@@ -1,3 +1,4 @@
+import LinkedInIcon from "@/components/linkedin-icon";
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -61,11 +62,16 @@ export default function Contact() {
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <ExternalLink className="mt-0.5 size-4 shrink-0 text-primary" />
-                    <span className="text-muted-foreground">
-                      LinkedIn — URL coming soon
-                    </span>
-                  </li>
+  <LinkedInIcon size={16} />
+  
+   <a href="https://www.linkedin.com/in/vedabyte-solutions-359161425/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-muted-foreground transition-colors hover:text-foreground"
+  >
+    LinkedIn
+  </a>
+</li>
                 </ul>
               </div>
 
