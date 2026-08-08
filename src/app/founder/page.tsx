@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import profilePhoto from "@/assets/profile.png";
@@ -60,12 +60,24 @@ export default function Founder() {
                 maintained and scaled, not rebuilt from scratch two years later.
               </p>
 
-              <Link
-                href="/contact"
-                className="btn-primary mt-4 inline-flex w-fit items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold"
-              >
-                Get in touch <ArrowUpRight className="size-4" />
-              </Link>
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <Link
+                  href="/contact"
+                  className="btn-primary inline-flex w-fit items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold"
+                >
+                  Get in touch <ArrowUpRight className="size-4" />
+                </Link>
+
+                
+                 <a href="/anurag-bhandari-cv.pdf"
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-fit items-center gap-2 rounded-full border border-border px-7 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+                >
+                  Download CV <Download className="size-4" />
+                </a>
+              </div>
             </div>
           </div>
         </section>
