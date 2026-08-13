@@ -1,4 +1,4 @@
-import LinkedInIcon from "@/components/linkedin-icon";
+﻿import LinkedInIcon from "@/components/linkedin-icon";
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -41,12 +41,14 @@ export default function Contact() {
                 <ul className="mt-10 space-y-5 text-sm">
                   <li className="flex items-start gap-3">
                     <Mail className="mt-0.5 size-4 shrink-0 text-primary" />
-                    <a
-                      href="mailto:vedabytesolutions1@gmail.com"
-                      className="text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      vedabytesolutions1@gmail.com
-                    </a>
+                    <div className="flex flex-col gap-1 text-muted-foreground">
+                      <a href="mailto:anurag.bhandari@vedabytesolutions.com.np" className="transition-colors hover:text-foreground">
+                        anurag.bhandari@vedabytesolutions.com.np
+                      </a>
+                      <a href="mailto:contact@vedabytesolutions.com.np" className="transition-colors hover:text-foreground">
+                        contact@vedabytesolutions.com.np
+                      </a>
+                    </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <Phone className="mt-0.5 size-4 shrink-0 text-primary" />
@@ -62,16 +64,11 @@ export default function Contact() {
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
-  <LinkedInIcon size={16} />
-  
-   <a href="https://www.linkedin.com/in/vedabyte-solutions-359161425/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-muted-foreground transition-colors hover:text-foreground"
-  >
-    LinkedIn
-  </a>
-</li>
+                    <LinkedInIcon size={16} />
+                    <a href="https://www.linkedin.com/in/vedabyte-solutions-359161425/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground transition-colors hover:text-foreground">
+                      LinkedIn
+                    </a>
+                  </li>
                 </ul>
               </div>
 

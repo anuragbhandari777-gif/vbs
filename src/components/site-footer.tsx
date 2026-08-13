@@ -71,13 +71,16 @@ export function SiteFooter() {
             <p className="mt-1 text-sm text-muted-foreground">44600</p>
           </div>
           <div>
-            <p className="text-sm text-primary">+977 981193321</p>
+            <p className="text-sm text-primary">+977 9811933213</p>
             <p className="text-sm text-primary">+977 9849916191</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              vedabytesolutions1@gmail.com
-            </p>
+
+            <div className="mt-1 flex flex-col gap-1 text-sm text-muted-foreground">
+              <p>anurag.bhandari@vedabytesolutions.com.np</p>
+              <p>contact@vedabytesolutions.com.np</p>
+            </div>
+
             
-              <a href="https://www.linkedin.com/in/vedabyte-solutions-359161425/"
+           <a   href="https://www.linkedin.com/in/vedabyte-solutions-359161425/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
